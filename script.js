@@ -11,7 +11,8 @@ const TAG_MAP = {
   personnel: '人事',
   delegate: '學生代表',
   election: '選舉',
-  procedure: '議事'
+  procedure: '議事',
+  general: '綜合'
 };
 
 async function fetchManifest() {
