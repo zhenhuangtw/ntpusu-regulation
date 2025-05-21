@@ -1,0 +1,36 @@
+name: Auto Update manifest.json
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'file/**'
+
+jobs:
+  update-manifest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run generate-manifest.mjs
+        run: node generate-manifest.mjs
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "chore: auto-update manifest.json"
+          branch: auto/update-manifest
+          title: "chore: auto-update manifest.json"
+          body: |
+            這個 PR 由 GitHub Actions 自動產生，用於更新 manifest.json。
+          labels: auto-update
