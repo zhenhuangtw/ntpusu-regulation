@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>JSON API</title>
+</head>
+<body>
+<script type="module">
+  const id = location.hash.replace('#', '');
+  const responseContainer = document.createElement('pre');
+  document.body.appendChild(responseContainer);
+
+  async function fetchLawFile(id) {
+    try {
+      const files = await fetch('./manifest.json').then(res => res.json());
+      const file = files.find(f => f.id === id);
+      if (!file) throw new Error('找不到指定法規');
+
+      const raw = await fetch(`./file/${file.filename}`).then(res => res.text());
+      const [yamlText, ...body] = raw.split('---').filter(Boolean);
+      const meta = jsyaml.load(yamlText);
+      const content = body.join('---').trim();
+
+      responseContainer.textContent = JSON.stringify({ id, ...meta, content }, null, 2);
+    } catch (e) {
+      responseContainer.textContent = JSON.stringify({ error: e.message }, null, 2);
+    }
+  }
+
+  import('https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js').then(() => {
+    fetchLawFile(id);
+  });
+</script>
+</body>
+</html>
