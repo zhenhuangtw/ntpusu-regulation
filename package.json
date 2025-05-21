@@ -16,8 +16,8 @@
     "url": "https://github.com/zhenhuangtw/ntpusu-regulation/issues"
   },
   "homepage": "https://github.com/zhenhuangtw/ntpusu-regulation#readme",
-  "description": "",
   "dependencies": {
     "js-yaml": "^4.1.0"
-  }
+  },
+  "description": ""
 }
