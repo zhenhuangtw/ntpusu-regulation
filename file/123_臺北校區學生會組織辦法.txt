@@ -1,0 +1,11 @@
+---
+title: 台北校區學生會組織辦法
+category: taipei
+tags: [organization, personnel]
+modified: 2024-11-20
+history: 2022.03.01 制定；2024.11.20 修正
+status: active
+---
+第一條　為規範臺北校區學生會組織架構，依據學生自治原則制定本辦法。
+第二條　學生會設置會長、副會長各一人，由學生選舉產生。
+...
